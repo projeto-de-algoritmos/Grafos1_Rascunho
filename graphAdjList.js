@@ -1,4 +1,5 @@
 import { Edge } from "./edge";
+import { Queue } from "./queue";
 /**
  * `Adjacency List` implementation of a `Graph`.
  * There are two rules of usage:
