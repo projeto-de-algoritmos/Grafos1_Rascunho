@@ -115,7 +115,7 @@ export class GraphAdjList {
     return numberOfConnectedComponents;
   }
   /**
-   * Implementation of a DFS.
+   * Implementation of a BFS.
    * @param rootNode The starting node.
    * @param visitedNodes A set of ids of nodes that have already been visited.
    * @returns A set of the visited nodes in the order they were visited.
