@@ -105,13 +105,35 @@ export class GraphAdjList {
   getNumberOfConnectedComponents() {
     let numberOfConnectedComponents = 0;
     const visitedNodes = new Set();
-    for (const node of this.nodes) {
-      if (!visitedNodes.has(node.id)) {
-        this.depthFirstSearch(node, visitedNodes);
+    for (const id in this.nodes) {
+      if (!visitedNodes.has(parseInt(id))) {
+        this.depthFirstSearch(this.nodes[id], visitedNodes);
         numberOfConnectedComponents++;
       }
     }
 
     return numberOfConnectedComponents;
+  }
+  /**
+   * Implementation of a DFS.
+   * @param rootNode The starting node.
+   * @param visitedNodes A set of ids of nodes that have already been visited.
+   * @returns A set of the visited nodes in the order they were visited.
+   */
+  breadthFirstSearch(rootNode, visitedNodes = new Set()) {
+    const queue = new Queue();
+    queue.enqueue(rootNode);
+    visitedNodes.add(parseInt(rootNode.id));
+
+    while(!queue.isEmpty()){
+      const node = queue.dequeue();
+      for(const adjacentNode of this.adjacencyList[node.id]){
+        if(!visitedNodes.has(parseInt(adjacentNode.id))){
+          queue.enqueue(adjacentNode);
+          visitedNodes.add(parseInt(adjacentNode.id));
+        }
+      }
+    }
+    return visitedNodes;
   }
 }
