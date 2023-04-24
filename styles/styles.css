@@ -1,0 +1,8 @@
+body {
+    background-color: pink;
+}
+
+head , head *{
+  display: block;
+  background-color: blue;
+}
