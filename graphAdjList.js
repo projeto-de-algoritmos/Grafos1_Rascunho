@@ -106,7 +106,7 @@ export class GraphAdjList {
     let numberOfConnectedComponents = 0;
     const visitedNodes = new Set();
     for (const id in this.nodes) {
-      if (!visitedNodes.has(parseInt(id))) {
+      if (!visitedNodes.has(+id)) {
         this.depthFirstSearch(this.nodes[id], visitedNodes);
         numberOfConnectedComponents++;
       }
@@ -123,14 +123,14 @@ export class GraphAdjList {
   breadthFirstSearch(rootNode, visitedNodes = new Set()) {
     const queue = new Queue();
     queue.enqueue(rootNode);
-    visitedNodes.add(parseInt(rootNode.id));
+    visitedNodes.add(+rootNode.id);
 
     while(!queue.isEmpty()){
       const node = queue.dequeue();
       for(const adjacentNode of this.adjacencyList[node.id]){
-        if(!visitedNodes.has(parseInt(adjacentNode.id))){
+        if(!visitedNodes.has(+adjacentNode.id)){
           queue.enqueue(adjacentNode);
-          visitedNodes.add(parseInt(adjacentNode.id));
+          visitedNodes.add(+adjacentNode.id);
         }
       }
     }
