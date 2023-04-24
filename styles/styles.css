@@ -2,7 +2,24 @@ body {
     background-color: pink;
 }
 
-head , head *{
-  display: block;
-  background-color: blue;
+.flex {
+  display: flex;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.grid-row, .square {
+  flex: auto;
+}
+
+.grid {
+  border: 1em solid red;
+  width: 600px;
+  height: 600px;
+}
+
+.square {
+  border: 1px solid gray;
 }
