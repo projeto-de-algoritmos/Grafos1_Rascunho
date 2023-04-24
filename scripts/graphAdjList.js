@@ -1,5 +1,5 @@
-import { Edge } from "./edge";
-import { Queue } from "./queue";
+import { Edge } from "./edge.js";
+import { Queue } from "./queue.js";
 /**
  * `Adjacency List` implementation of a `Graph`.
  * There are two rules of usage:
