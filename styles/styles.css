@@ -1,6 +1,7 @@
 body {
   background-color: pink;
   font-family: 'abel', sans-serif;
+  overflow: hidden;
 }
 
 .flex {
@@ -16,9 +17,8 @@ body {
 }
 
 .grid {
-  border: 1em solid red;
-  width: 600px;
-  height: 600px;
+  width: 100vw;
+  height: 100vw;
 }
 
 .square {
@@ -28,4 +28,8 @@ body {
 h1 {
   font-size: 5rem;
   text-align: center;
+}
+  
+.undraggable {
+  user-select: none;
 }
