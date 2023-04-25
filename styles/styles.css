@@ -20,7 +20,9 @@ body {
   height: 100vw;
 }
 
-
+.show-tracks {
+  border: 1px solid;
+}
 
 h1 {
   font-size: 5rem;

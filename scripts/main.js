@@ -1,6 +1,8 @@
 import { GraphAdjList } from './graphAdjList.js';
 import { Node } from './node.js';
 
+const GRID_SIZE = 100;
+
 const grid = document.querySelector('.grid');
 const graph = new GraphAdjList();
 let idCount = 1;
@@ -105,9 +107,10 @@ function changeSquareColor (event) {
   }
 }
 
-createGrid(100);
+createGrid(GRID_SIZE);
 
 const rainbowButton = document.getElementById('rainbow');
+const showGridButton = document.getElementById('show-grid');
 const fillButton = document.getElementById('fill');
 const colorButton = document.getElementById('color');
 const eraserButton = document.getElementById('eraser');
@@ -122,4 +125,11 @@ colorButton.addEventListener('click', () => {
 
 eraserButton.addEventListener('click', () => {
   mode = modes.eraser;
+});
+
+showGridButton.addEventListener('click', () => {
+  const squares = document.getElementsByClassName('square');
+  [...squares].forEach(square=>{
+    square.classList.toggle('show-tracks');
+  });
 });
