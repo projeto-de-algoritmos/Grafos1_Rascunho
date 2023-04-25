@@ -1,5 +1,4 @@
 body {
-  background-color: pink;
   font-family: 'abel', sans-serif;
   overflow: hidden;
 }
@@ -21,9 +20,7 @@ body {
   height: 100vw;
 }
 
-.square {
-  border: 1px solid gray;
-}
+
 
 h1 {
   font-size: 5rem;
