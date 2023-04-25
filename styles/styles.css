@@ -1,5 +1,8 @@
 body {
-    background-color: pink;
+  background-color: pink;
+  /*font-family: 'roboto', sans-serif;*/
+  /*font-family: 'abel', sans-serif;*/
+  /*font-family: 'radjhani', sans-serif;*/
 }
 
 .flex {
@@ -22,4 +25,9 @@ body {
 
 .square {
   border: 1px solid gray;
+}
+
+h1 {
+  font-size: 5rem;
+  text-align: center;
 }
