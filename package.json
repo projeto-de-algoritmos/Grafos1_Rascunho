@@ -1,0 +1,22 @@
+{
+  "name": "grafos1_rascunho",
+  "version": "1.0.0",
+  "description": "Project of Graph.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/projeto-de-algoritmos/Grafos1_Rascunho.git"
+  },
+  "author": "lucasqueiroz23 & oCaioOliveira",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/projeto-de-algoritmos/Grafos1_Rascunho/issues"
+  },
+  "homepage": "https://github.com/projeto-de-algoritmos/Grafos1_Rascunho#readme",
+  "devDependencies": {
+    "eslint": "^8.39.0"
+  }
+}
