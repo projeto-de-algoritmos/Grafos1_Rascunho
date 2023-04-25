@@ -1,8 +1,6 @@
 body {
   background-color: pink;
-  /*font-family: 'roboto', sans-serif;*/
-  /*font-family: 'abel', sans-serif;*/
-  /*font-family: 'radjhani', sans-serif;*/
+  font-family: 'abel', sans-serif;
 }
 
 .flex {
