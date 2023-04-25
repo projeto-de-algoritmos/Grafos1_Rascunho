@@ -1,5 +1,6 @@
 body {
-  background-color: pink;
+  display: flex;
+  background-color: white;
   font-family: 'abel', sans-serif;
   overflow: hidden;
 }
@@ -21,10 +22,6 @@ body {
   height: 100vw;
 }
 
-.square {
-  border: 1px solid gray;
-}
-
 h1 {
   font-size: 5rem;
   text-align: center;
@@ -33,3 +30,47 @@ h1 {
 .undraggable {
   user-select: none;
 }
+
+.menu {
+  height: 100vw;
+  width: 4%;
+  background-color: #cbcbcb; 
+  color: #fff;
+  padding: 16px; 
+}
+
+.menu h2 {
+  font-size: 1rem;
+  margin-bottom: 16px;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+}
+
+.menu ul {
+  list-style: none; 
+  margin: 0;
+  padding: 0;
+}
+
+.menu li {
+  margin-bottom: 8px;
+}
+
+.menu button {
+  background-color: #cbcbcb; 
+  border: none; 
+  cursor: pointer; 
+  padding: 8px 16px; 
+  width: 100%;
+}
+
+.icon-image {
+  width: 80%;
+  height: 80%;
+  transition: transform 0.2s ease-in-out;
+}
+
+.menu button:hover .icon-image {
+  transform: scale(1.2);
+  }
