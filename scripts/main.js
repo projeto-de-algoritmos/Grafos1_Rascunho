@@ -4,6 +4,15 @@ import { Node } from './node.js';
 const grid = document.querySelector('.grid');
 const graph = new GraphAdjList();
 let idCount = 1;
+
+const modes = {
+  color: 'color',
+  rainbow: 'rainbow',
+  eraser: 'eraser',
+  fill: 'fill',
+};
+
+let mode = modes.color;
 /**
  * Creates a row of a grid.
  * @returns The new row.
@@ -14,7 +23,10 @@ function createRow () {
   row.classList.add('flex');
   return row;
 }
-
+/**
+ * Get a square's identifier.
+ * @param square The square of interest.
+ */
 function getSquareId(square){
   return +square.id.split('_')[1];
 }
@@ -77,12 +89,37 @@ function getRandomNumber(){
 /**
  * Changes the square color.
  * @param event The event that triggers the function.
+ * @param mode The mode of painting.
  */
-function changeSquareColor (event){
+function changeSquareColor (event) {
   if( !mouseIsMovingAndHeldDown(event) ) return;
-  const rgb = `${getRandomNumber()},${getRandomNumber()},${getRandomNumber()}`;
-  event.target.style.backgroundColor = `rgb(${rgb})`;
-  const id = getSquareId(event.target);
+  if(mode === modes.color){
+    event.target.style.backgroundColor = 'black';
+  }
+  if(mode === modes.rainbow){
+    const rgb = `${getRandomNumber()},${getRandomNumber()},${getRandomNumber()}`;
+    event.target.style.backgroundColor = `rgb(${rgb})`;
+  }
+  if(mode === modes.eraser){
+    event.target.style.backgroundColor = 'white';
+  }
 }
 
 createGrid(100);
+
+const rainbowButton = document.getElementById('rainbow');
+const fillButton = document.getElementById('fill');
+const colorButton = document.getElementById('color');
+const eraserButton = document.getElementById('eraser');
+
+rainbowButton.addEventListener('click', () => {
+  mode = modes.rainbow;
+});
+
+colorButton.addEventListener('click', () => {
+  mode = modes.color;
+});
+
+eraserButton.addEventListener('click', () => {
+  mode = modes.eraser;
+});
