@@ -1,0 +1,24 @@
+{
+  "name": "grafos1_rascunho",
+  "version": "1.0.0",
+  "description": "Trabalho de Grafos1.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/projeto-de-algoritmos/Grafos1_Sketch.git"
+  },
+  "author": "Caio César e Lucas Queiroz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/projeto-de-algoritmos/Grafos1_Sketch/issues"
+  },
+  "homepage": "https://github.com/projeto-de-algoritmos/Grafos1_Sketch#readme",
+  "devDependencies": {
+    "eslint": "^8.39.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.27.5"
+  }
+}
