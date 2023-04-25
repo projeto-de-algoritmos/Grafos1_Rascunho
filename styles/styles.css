@@ -1,5 +1,5 @@
 body {
-    background-color: pink;
+  overflow: hidden;
 }
 
 .flex {
@@ -15,11 +15,10 @@ body {
 }
 
 .grid {
-  border: 1em solid red;
-  width: 600px;
-  height: 600px;
+  width: 100vw;
+  height: 100vw;
 }
 
-.square {
-  border: 1px solid gray;
+.undraggable {
+  user-select: none;
 }
