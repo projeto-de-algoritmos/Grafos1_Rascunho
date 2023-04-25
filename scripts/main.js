@@ -16,6 +16,8 @@ function createRow () {
 function createColumn (row) {
   const square = document.createElement('div');
   square.classList.add('square');
+  square.classList.add('undraggable');
+  square.addEventListener('mouseover', changeSquareColor);
   row.appendChild(square);
 }
 /**
@@ -31,5 +33,34 @@ function createGrid (size) {
     grid.appendChild(row);
   }
 }
-
-createGrid(20);
+/**
+ * The following events must be listened to 
+ * in order to control if the grid is only being
+ * drawn into if the user is moving the mouse while
+ * holding it down.
+ */
+let mouseIsBeingHeld = false;
+document.addEventListener('mousedown', () => {
+  mouseIsBeingHeld = true;
+})
+document.addEventListener('mouseup', ()=> {
+  mouseIsBeingHeld = false;
+})
+/**
+ * Checks if mouse is being moved and held down.
+ * @param event The event that triggers the function.
+ */
+function mouseIsMovingAndHeldDown (event) {
+  if(event.type === 'mouseover' && mouseIsBeingHeld) {
+    return true;
+  }
+}
+/**
+ * Changes the square color.
+ * @param event The event that triggers the function.
+ */
+function changeSquareColor (event){
+  if( !mouseIsMovingAndHeldDown(event) ) return;
+  event.target.style.backgroundColor = 'black';
+}
+createGrid(100);
