@@ -1,18 +1,23 @@
 import { GraphAdjList } from './graphAdjList.js';
 import { Node } from './node.js';
-import { COLOR_BLACK, COLOR_WHITE, GRID_SIZE }from './constants.js';
+import { COLOR_BLACK, COLOR_WHITE, GRID_SIZE, getRandomNumber }from './utils.js';
 
 const grid = document.querySelector('.grid');
 const graph = new GraphAdjList();
 let idCount = 1;
-
+/**
+ * All the possible modes that the user can select
+ * to change the grid.
+ */
 const modes = {
   color: 'color',
   rainbow: 'rainbow',
   eraser: 'eraser',
   fill: 'fill',
 };
-
+/** The `mode` variable controls the possible modes
+ * that the user can select to change the grid.
+ */
 let mode = modes.color;
 /**
  * Creates a row of a grid.
@@ -42,8 +47,8 @@ function createColumn (row) {
   graph.addNode(new Node(squareId, COLOR_WHITE));
   square.classList.add('square');
   square.classList.add('undraggable');
-  square.addEventListener('mouseover', changeSquareColor);
-  square.addEventListener('click', changeSquareColor);
+  square.addEventListener('mouseover', updateGrid);
+  square.addEventListener('click', updateGrid);
 
   row.appendChild(square);
 }
@@ -82,19 +87,13 @@ function mouseIsMovingAndHeldDown (event) {
     return true;
   }
 }
+
 /**
- * Get a random integer between 
- * 0 and 255.
- */
-function getRandomNumber(){ 
-  return Math.floor(Math.random() * 1000) % 256;
-}
-/**
- * Changes the square color.
+ * Updates the grid.
  * @param event The event that triggers the function.
  * @param mode The mode of painting.
  */
-function changeSquareColor (event) {
+function updateGrid (event) {
   const squareId = getSquareId(event.target);
   if(event.type === 'click' && mode !== modes.fill) {
     paintSquare(event.target, COLOR_BLACK);
