@@ -123,7 +123,7 @@ export class GraphAdjList {
    * @param visitedNodes A set of ids of nodes that have already been visited.
    * @returns A set of the visited nodes in the order they were visited.
    */
-  breadthFirstSearch(rootNode, startingColor, newColor, visitedNodes = new Set()) {
+  async breadthFirstSearch(rootNode, startingColor, newColor, visitedNodes = new Set()) {
 
     const queue = new Queue();
     queue.enqueue(rootNode);
@@ -133,7 +133,8 @@ export class GraphAdjList {
 
       const node = queue.dequeue();
       const square = getSquareById(node.id);
-      
+
+      await new Promise(r => setTimeout(r, 2));
       this.updateNodeColor(node.id, newColor);
       square.style.backgroundColor = this.nodes[node.id].color;
 
