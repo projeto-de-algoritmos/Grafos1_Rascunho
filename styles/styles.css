@@ -20,6 +20,7 @@ body {
 .grid {
   width: 100vw;
   height: 100vw;
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><line x1="0" y1="8" x2="16" y2="8" stroke="black" stroke-width="2"/><line x1="8" y1="0" x2="8" y2="16" stroke="black" stroke-width="2"/></svg>') 10 10, crosshair;
 }
 
 h1 {
@@ -79,7 +80,7 @@ h1 {
   display: inline-block;
   cursor: pointer;
   border: none;
-  padding: 8px 16px; 
+  padding: 8px 16px;
   transition: transform 0.2s ease-in-out;
 }
 
@@ -88,5 +89,88 @@ h1 {
 }
 
 input[type="color"] {
-  display: none;
+  border: none;
+  vertical-align: middle;
 }
+
+#color-picker {
+  height: 0px;
+  width: 14px;
+  border-radius: 50%;
+  background: none;
+}
+
+#color-picker::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+#color-picker::-webkit-color-swatch {
+  border: none;
+  border-radius: 50%;
+  height: 14px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropbtn {
+  background-color: #cbcbcb;
+  border: none;
+  cursor: pointer;
+  padding: 8px 16px;
+  width: 100%;
+}
+
+.icon-image {
+  width: 80%;
+  height: 80%;
+  transition: transform 0.2s ease-in-out;
+}
+
+.dropbtn:hover .icon-image {
+  transform: scale(1.2);
+}
+
+.dropdown-content button {
+  background-color: #c5c5c5;
+  border: none;
+  cursor: pointer;
+  padding: 8px 16px;
+  width: 100%;
+  border-top: 2px solid #000000;
+  border-bottom: 2px solid #000000;
+  border-left: 2px solid #000000;
+  border-right: 2px solid #000000;
+  border-radius: 5px;
+}
+
+.dropdown-content button:hover {
+  transform: scale(1.2);
+}
+
+.small-pencil {
+  width: 50%;
+  height: 50%;
+}	
+
+.medium-pencil {
+  width: 80%;
+  height: 80%;
+}	
+
+.big-pencil {
+  width: 100%;
+  height: 100%;
+}	
