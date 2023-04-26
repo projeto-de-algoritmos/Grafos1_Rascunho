@@ -73,4 +73,20 @@ h1 {
 
 .menu button:hover .icon-image {
   transform: scale(1.2);
-  }
+}
+
+.color-picker-button {
+  display: inline-block;
+  cursor: pointer;
+  border: none;
+  padding: 8px 16px; 
+  transition: transform 0.2s ease-in-out;
+}
+
+.color-picker-button:hover {
+  transform: scale(1.2);
+}
+
+input[type="color"] {
+  display: none;
+}
