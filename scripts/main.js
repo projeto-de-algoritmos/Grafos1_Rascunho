@@ -187,10 +187,10 @@ const fillButton = document.getElementById("fill");
 const colorButton = document.getElementById("color-picker");
 const eraserButton = document.getElementById("eraser");
 const eraseAllButton = document.getElementById("erase-all");
-/*
+
 rainbowButton.addEventListener("click", () => {
   mode = modes.rainbow;
-});*/
+});
 
 colorButton.addEventListener("click", () => {
   mode = modes.color;
