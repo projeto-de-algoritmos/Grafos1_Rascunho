@@ -17,6 +17,10 @@ body {
   flex: auto;
 }
 
+.show-tracks {
+  border: 1px solid gray;
+}
+
 .grid {
   width: 100vw;
   height: 100vw;
