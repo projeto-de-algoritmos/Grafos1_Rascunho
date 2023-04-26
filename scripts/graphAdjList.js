@@ -87,13 +87,13 @@ export class GraphAdjList {
   }
   /**
    * Recursive implementation of a DFS.
-   * @param rootNode The starting node.
+   * @param id The identifier of the starting node.
    * @param visitedNodes A set of ids of nodes that have already been visited.
    * @returns A set of the visited nodes in the order they were visited.
    */
-  depthFirstSearch(rootNode, visitedNodes = new Set()) {
-    visitedNodes.add(rootNode.id);
-    for (const adjacentNode of this.adjacencyList[rootNode.id]) {
+  depthFirstSearch(id, visitedNodes = new Set()) {
+    visitedNodes.add(id);
+    for (const adjacentNode of this.adjacencyList[id]) {
       if (!visitedNodes.has(adjacentNode.id)) {
         this.depthFirstSearch(adjacentNode, visitedNodes);
       }

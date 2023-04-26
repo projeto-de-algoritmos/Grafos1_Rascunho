@@ -46,12 +46,11 @@ function createRow() {
  */
 function createAdjacencies(rootSquare) {
   const rootNodeId = getSquareId(rootSquare);
-  const rootNode = graph.nodes[rootNodeId];
 
   // upper adjacency
   const upperAdjacencyId = rootNodeId - GRID_SIZE;
   if (upperAdjacencyId > 0) {
-    graph.createAdjacency(rootNode, graph.nodes[upperAdjacencyId]);
+    graph.createAdjacency(graph.nodes[rootNodeId], graph.nodes[upperAdjacencyId]);
   }
 
   // rightmost adjacency
@@ -62,7 +61,7 @@ function createAdjacencies(rootSquare) {
     +rightmostAdjacentSquare.getAttribute("row") ===
       +rootSquare.getAttribute("row")
   ) {
-    graph.createAdjacency(rootNode, graph.nodes[rightmostAdjacencyId]);
+    graph.createAdjacency(graph.nodes[rootNodeId], graph.nodes[rightmostAdjacencyId]);
   }
 }
 
