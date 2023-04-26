@@ -14,13 +14,37 @@
     <div class="menu">
       <ul>
         <li>
-          <button>
-            <img
-              class="icon-image"
-              title="Selecionar Tamanho do Pincel"
-              src="icons/brush.svg"
-            />
-          </button>
+          <div class="dropdown">
+            <button class="dropbtn">
+              <img
+                class="icon-image"
+                title="Selecionar Tamanho do Pincel"
+                src="icons/brush.svg"
+              />
+            </button>
+            <div class="dropdown-content">
+              <button>
+                <img
+                  class="small-pencil"
+                  title="Tamanho Pequeno"
+                  src="icons/brush.svg"
+                />
+              </button>
+              <button>
+                <img
+                  class="medium-pencil"
+                  title="Tamanho Médio"
+                  src="icons/brush.svg"
+                />
+              </button>
+              <button>
+                <img
+                  class="big-pencil"
+                  title="Tamanho Grande"
+                  src="icons/brush.svg"
+                />
+              </button>
+            </div>
         </li>
         <li>
           <button>
@@ -29,7 +53,7 @@
         </li>
         <li>
           <div>
-            <input id="color-picker" type="color" value="#fff" />
+            <input id="color-picker" type="color" />
             <label for="color-picker" class="color-picker-button">
               <img class="icon-image" title="Selecionar Cor" src="icons/palette.svg" />
             </label>
