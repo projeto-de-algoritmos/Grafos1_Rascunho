@@ -95,12 +95,17 @@ function mouseIsMovingAndHeldDown (event) {
  */
 function updateGrid (event) {
   const squareId = getSquareId(event.target);
-  if(event.type === 'click' && mode !== modes.fill) {
+  if(event.type === 'click' && mode === modes.fill){
+    const rootNode = graph.nodes[squareId];
+    const squareColor = rootNode.color;
+    return graph.breadthFirstSearch(rootNode, squareColor);
+  }
+  if(event.type === 'click') {
     paintSquare(event.target, COLOR_BLACK);
     graph.updateNodeColor(squareId, COLOR_BLACK);
     return;
   }
-  if( !mouseIsMovingAndHeldDown(event) || mode === modes.fill) return;
+  if( !mouseIsMovingAndHeldDown(event) ) return;
   if(mode === modes.color){
     paintSquare(event.target, COLOR_BLACK);
   }
@@ -129,6 +134,7 @@ const showGridButton = document.getElementById('show-grid');
 const fillButton = document.getElementById('fill');
 const colorButton = document.getElementById('color');
 const eraserButton = document.getElementById('eraser');
+const eraseAllButton = document.getElementById('erase-all');
 
 rainbowButton.addEventListener('click', () => {
   mode = modes.rainbow;
@@ -144,6 +150,13 @@ fillButton.addEventListener('click', () => {
 
 eraserButton.addEventListener('click', () => {
   mode = modes.eraser;
+});
+
+eraseAllButton.addEventListener('click', () => {
+  const squares = document.getElementsByClassName('square');
+  [...squares].forEach(square=>{
+    paintSquare(square, COLOR_WHITE);
+  }); 
 });
 
 showGridButton.addEventListener('click', () => {
