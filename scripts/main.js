@@ -204,7 +204,7 @@ colorButton.addEventListener("click", () => {
 });
 
 pencilButton.addEventListener("click", () => {
-  mode = modes.color;
+  mode = MODES.color;
 });
 
 fillButton.addEventListener("click", () => {
