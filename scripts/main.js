@@ -52,7 +52,6 @@ function createAdjacencies(rootSquare) {
   const upperAdjacencyId = rootNodeId - GRID_SIZE;
   if (upperAdjacencyId > 0) {
     graph.createAdjacency(rootNode, graph.nodes[upperAdjacencyId]);
-
   }
 
   // rightmost adjacency
@@ -82,12 +81,12 @@ function createColumn(row) {
   square.classList.add("square");
   square.classList.add("undraggable");
 
-  square.addEventListener("mouseover", updateGrid);
-  square.addEventListener("click", updateGrid);
-
   const squareId = getSquareId(square);
   const node = new Node(squareId, COLOR_WHITE);
   graph.addNode(node);
+
+  square.addEventListener("mouseover", updateGrid);
+  square.addEventListener("click", updateGrid);
 
   children.push(square);
 
@@ -138,20 +137,21 @@ function mouseIsMovingAndHeldDown(event) {
 function updateGrid(event) {
   const squareId = getSquareId(event.target);
 
-  if (event.type === "click" && mode === MODES.fill) {
-    const rootNode = graph.nodes[squareId];
-    console.log(event.target);
-    console.log(rootNode);
-    const randomColor = new Color(
-      getRandomNumber(),
-      getRandomNumber(),
-      getRandomNumber()
-    );
-
-    graph.breadthFirstSearch(rootNode, randomColor);
-    return;
-  }
   if (event.type === "click") {
+    if (mode === MODES.fill) {
+      const randomColor = new Color(
+        getRandomNumber(),
+        getRandomNumber(),
+        getRandomNumber()
+      );
+
+      graph.breadthFirstSearch(
+        squareId,
+        graph.nodes[squareId].color,
+        randomColor
+      );
+      return;
+    }
     updateNodeColorAndPaintSquare(squareId, event.target, COLOR_BLACK);
     return;
   }
@@ -175,25 +175,14 @@ function updateGrid(event) {
     updateNodeColorAndPaintSquare(squareId, event.target, COLOR_WHITE);
     return;
   }
-
 }
-/**
- * Changes the background color of a square.
- * @param square The square of interest.
- * @param color The new background color.
- */
-function paintSquare(square, color) {
-  square.style.backgroundColor = color;
-}
-
 /**
  * Updates the graph's node color and it's square color.
  * @param {number} squareId Identifier of the node/square.
  * @param {*} square The square itself.
  * @param {*} color The node/square new color.
  */
-function updateNodeColorAndPaintSquare(squareId, square, color){
-  paintSquare(square, color.getRGB());
+function updateNodeColorAndPaintSquare(squareId, square, color) {
   graph.updateNodeColor(squareId, color);
 }
 
@@ -226,7 +215,7 @@ eraseAllButton.addEventListener("click", () => {
   const squares = document.getElementsByClassName("square");
 
   [...squares].forEach((square) => {
-    paintSquare(square, COLOR_WHITE.getRGB());
+    graph.updateNodeColor(square, COLOR_WHITE);
   });
 });
 
