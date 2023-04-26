@@ -1,7 +1,6 @@
 import { GraphAdjList } from './graphAdjList.js';
 import { Node } from './node.js';
-
-const GRID_SIZE = 100;
+import { COLOR_BLACK, COLOR_WHITE, GRID_SIZE }from './constants.js';
 
 const grid = document.querySelector('.grid');
 const graph = new GraphAdjList();
@@ -40,10 +39,12 @@ function createColumn (row) {
   const square = document.createElement('div');
   square.setAttribute('id', `sq_${idCount++}`);
   const squareId = getSquareId(square);
-  graph.addNode(new Node(squareId, true));
+  graph.addNode(new Node(squareId, COLOR_WHITE));
   square.classList.add('square');
   square.classList.add('undraggable');
   square.addEventListener('mouseover', changeSquareColor);
+  square.addEventListener('click', changeSquareColor);
+
   row.appendChild(square);
 }
 /**
@@ -94,17 +95,32 @@ function getRandomNumber(){
  * @param mode The mode of painting.
  */
 function changeSquareColor (event) {
-  if( !mouseIsMovingAndHeldDown(event) ) return;
+  const squareId = getSquareId(event.target);
+  if(event.type === 'click' && mode !== modes.fill) {
+    paintSquare(event.target, COLOR_BLACK);
+    graph.updateNodeColor(squareId, COLOR_BLACK);
+    return;
+  }
+  if( !mouseIsMovingAndHeldDown(event) || mode === modes.fill) return;
   if(mode === modes.color){
-    event.target.style.backgroundColor = 'black';
+    paintSquare(event.target, COLOR_BLACK);
   }
   if(mode === modes.rainbow){
-    const rgb = `${getRandomNumber()},${getRandomNumber()},${getRandomNumber()}`;
-    event.target.style.backgroundColor = `rgb(${rgb})`;
+    const rgb = `rgb(${getRandomNumber()},${getRandomNumber()},${getRandomNumber()})`;
+    paintSquare(event.target, rgb);
   }
   if(mode === modes.eraser){
-    event.target.style.backgroundColor = 'white';
+    paintSquare(event.target, COLOR_WHITE);
   }
+  graph.updateNodeColor(squareId, event.target.style.backgroundColor);
+}
+/**
+ * Changes the background color of a square.
+ * @param square The square of interest.
+ * @param color The new background color.
+ */
+function paintSquare(square, color) {
+  square.style.backgroundColor = color;
 }
 
 createGrid(GRID_SIZE);
@@ -121,6 +137,10 @@ rainbowButton.addEventListener('click', () => {
 
 colorButton.addEventListener('click', () => {
   mode = modes.color;
+});
+
+fillButton.addEventListener('click', () => {
+  mode = modes.fill;
 });
 
 eraserButton.addEventListener('click', () => {

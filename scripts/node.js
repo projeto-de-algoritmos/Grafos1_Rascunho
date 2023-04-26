@@ -2,8 +2,8 @@
  * A Node of a Graph.
  */
 export class Node {
-  constructor(id, fill){
+  constructor(id, color){
     this.id = id;
-    this.fill = fill;
+    this.color = color;
   }
 }

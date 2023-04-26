@@ -136,4 +136,12 @@ export class GraphAdjList {
     }
     return visitedNodes;
   }
+  /**
+   * Update the color of a node.
+   * @param id The id of the node of interest.
+   * @param newColor The new color of the node.
+   */
+  updateNodeColor(id, newColor){
+    this.nodes[id].color = newColor;
+  }
 }
