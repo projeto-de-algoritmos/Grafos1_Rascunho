@@ -1,5 +1,6 @@
 import { Edge } from "./edge.js";
 import { Queue } from "./queue.js";
+import { getSquareById } from "./utils.js";
 /**
  * `Adjacency List` implementation of a `Graph`.
  * There are two rules of usage:
@@ -118,17 +119,25 @@ export class GraphAdjList {
    * Implementation of a BFS.
    * @param rootNode The starting node.
    * @param startingColor The color of the starting node. It's what should be filled.
+   * @param newColor The color that the node shall be filled with.
    * @param visitedNodes A set of ids of nodes that have already been visited.
    * @returns A set of the visited nodes in the order they were visited.
    */
-  breadthFirstSearch(rootNode, startingColor, visitedNodes = new Set()) {
+  breadthFirstSearch(rootNode, startingColor, newColor, visitedNodes = new Set()) {
 
     const queue = new Queue();
     queue.enqueue(rootNode);
     visitedNodes.add(+rootNode.id);
 
     while(!queue.isEmpty()){
+
       const node = queue.dequeue();
+      const square = getSquareById(node.id);
+      
+      this.updateNodeColor(node.id, newColor);
+      square.style.backgroundColor = this.nodes[node.id].color;
+
+      
       for(const adjacentNode of this.adjacencyList[node.id]){
         if(!visitedNodes.has(+adjacentNode.id) && adjacentNode.color !== startingColor){
           queue.enqueue(adjacentNode);

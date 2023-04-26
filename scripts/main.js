@@ -5,7 +5,11 @@ import {
   COLOR_WHITE,
   GRID_SIZE,
   getRandomNumber,
+  getSquareById,
+  getSquareId,
+  getRGB
 } from "./utils.js";
+
 
 const grid = document.querySelector(".grid");
 const graph = new GraphAdjList();
@@ -35,22 +39,6 @@ function createRow() {
   row.classList.add("grid-row");
   row.classList.add("flex");
   return row;
-}
-/**
- * Get a square's identifier.
- * @param square The square of interest.
- */
-function getSquareId(square) {
-  return +square.id.split("_")[1];
-}
-/**
- * Get a Square(which is also a Node of a Graph)
- * by its id.
- * @param id The identifier of the Square.
- * @returns The Square.
- */
-function getSquareById(id) {
-  return document.getElementById(`sq_${id}`);
 }
 
 function createAdjacencies(rootSquare) {
@@ -158,7 +146,8 @@ function updateGrid(event) {
   if (event.type === "click" && mode === modes.fill) {
     const rootNode = graph.nodes[squareId];
     const squareColor = rootNode.color;
-    return graph.breadthFirstSearch(rootNode, squareColor);
+    graph.breadthFirstSearch(rootNode, squareColor, getRGB(getRandomNumber(), getRandomNumber(), getRandomNumber()));
+    return;
   }
   if (event.type === "click") {
     paintSquare(event.target, COLOR_BLACK);
@@ -170,8 +159,11 @@ function updateGrid(event) {
     paintSquare(event.target, COLOR_BLACK);
   }
   if (mode === modes.rainbow) {
-    const rgb = `rgb(${getRandomNumber()},${getRandomNumber()},${getRandomNumber()})`;
-    paintSquare(event.target, rgb);
+    const randomRed = getRandomNumber();
+    const randomGreen = getRandomNumber();
+    const randomBlue = getRandomNumber();
+
+    paintSquare(event.target, getRGB(randomRed, randomGreen, randomBlue));
   }
   if (mode === modes.eraser) {
     paintSquare(event.target, COLOR_WHITE);
