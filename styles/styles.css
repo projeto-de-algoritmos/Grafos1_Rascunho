@@ -149,10 +149,10 @@ input[type="color"] {
   cursor: pointer;
   padding: 8px 16px;
   width: 100%;
-  border-top: 2px solid #000000;
-  border-bottom: 2px solid #000000;
-  border-left: 2px solid #000000;
-  border-right: 2px solid #000000;
+  border-top: 2px solid #8d8d8d;
+  border-bottom: 2px solid #8d8d8d;
+  border-left: 2px solid #8d8d8d;
+  border-right: 2px solid #8d8d8d;
   border-radius: 5px;
 }
 
