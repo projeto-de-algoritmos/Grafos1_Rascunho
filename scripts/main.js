@@ -214,7 +214,8 @@ eraseAllButton.addEventListener("click", () => {
   const squares = document.getElementsByClassName("square");
 
   [...squares].forEach((square) => {
-    graph.updateNodeColor(square, COLOR_WHITE);
+    const squareId = getSquareId(square);
+    graph.updateNodeColor(squareId, COLOR_WHITE);
   });
 });
 
