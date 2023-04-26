@@ -1,6 +1,6 @@
 import { Edge } from "./edge.js";
 import { Queue } from "./queue.js";
-import { getSquareById } from "./utils.js";
+import { getSquareById, colorsAreEqual } from "./utils.js";
 /**
  * `Adjacency List` implementation of a `Graph`.
  * There are two rules of usage:
@@ -42,7 +42,7 @@ export class GraphAdjList {
   }
   /**
    * Checks if two nodes already have an adjacency.
-   * The first node must exist in the graph, or the 
+   * The first node must exist in the graph, or the
    * function will return false.
    * @param node1 First node of interest.
    * @param node2 Second node of interest.
@@ -87,13 +87,13 @@ export class GraphAdjList {
   }
   /**
    * Recursive implementation of a DFS.
-   * @param rootNode The starting node.
+   * @param id The identifier of the starting node.
    * @param visitedNodes A set of ids of nodes that have already been visited.
    * @returns A set of the visited nodes in the order they were visited.
    */
-  depthFirstSearch(rootNode, visitedNodes = new Set()) {
-    visitedNodes.add(rootNode.id);
-    for (const adjacentNode of this.adjacencyList[rootNode.id]) {
+  depthFirstSearch(id, visitedNodes = new Set()) {
+    visitedNodes.add(id);
+    for (const adjacentNode of this.adjacencyList[id]) {
       if (!visitedNodes.has(adjacentNode.id)) {
         this.depthFirstSearch(adjacentNode, visitedNodes);
       }
@@ -117,30 +117,33 @@ export class GraphAdjList {
   }
   /**
    * Implementation of a BFS.
-   * @param rootNode The starting node.
-   * @param startingColor The color of the starting node. It's what should be filled.
+   * @param id Id of the starting node.
    * @param newColor The color that the node shall be filled with.
+   * @param startingColor The color of the starting node. This is the color that should be painted.
    * @param visitedNodes A set of ids of nodes that have already been visited.
    * @returns A set of the visited nodes in the order they were visited.
    */
-  async breadthFirstSearch(rootNode, startingColor, newColor, visitedNodes = new Set()) {
-
+  async breadthFirstSearch(
+    id,
+    startingColor,
+    newColor,
+    visitedNodes = new Set()
+  ) {
     const queue = new Queue();
-    queue.enqueue(rootNode);
-    visitedNodes.add(+rootNode.id);
+    queue.enqueue(this.nodes[id]);
 
-    while(!queue.isEmpty()){
+    visitedNodes.add(+id);
 
+    while (!queue.isEmpty()) {
       const node = queue.dequeue();
-      const square = getSquareById(node.id);
-
-      await new Promise(r => setTimeout(r, 2));
+      await new Promise((r) => setTimeout(r, 2));
       this.updateNodeColor(node.id, newColor);
-      square.style.backgroundColor = this.nodes[node.id].color;
 
-      
-      for(const adjacentNode of this.adjacencyList[node.id]){
-        if(!visitedNodes.has(+adjacentNode.id) && adjacentNode.color !== startingColor){
+      for (const adjacentNode of this.adjacencyList[node.id]) {
+        if (
+          !visitedNodes.has(+adjacentNode.id) &&
+          colorsAreEqual(this.nodes[adjacentNode.id].color, startingColor)
+        ) {
           queue.enqueue(adjacentNode);
           visitedNodes.add(+adjacentNode.id);
         }
@@ -151,9 +154,11 @@ export class GraphAdjList {
   /**
    * Update the color of a node.
    * @param id The id of the node of interest.
-   * @param newColor The new color of the node.
+   * @param {Color}newColor The new color of the node.
    */
-  updateNodeColor(id, newColor){
+  updateNodeColor(id, newColor) {
     this.nodes[id].color = newColor;
+    const square = getSquareById(id);
+    square.style.backgroundColor = newColor.getRGB();
   }
 }
