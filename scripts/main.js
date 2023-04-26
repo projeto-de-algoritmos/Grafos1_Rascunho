@@ -7,9 +7,8 @@ import {
   getRandomNumber,
   getSquareById,
   getSquareId,
-  getRGB
 } from "./utils.js";
-
+import { Color } from "./color.js";
 
 const grid = document.querySelector(".grid");
 const graph = new GraphAdjList();
@@ -20,7 +19,7 @@ let children = [];
  * All the possible modes that the user can select
  * to change the grid.
  */
-const modes = {
+const MODES = {
   color: "color",
   rainbow: "rainbow",
   eraser: "eraser",
@@ -29,7 +28,7 @@ const modes = {
 /** The `mode` variable controls the possible modes
  * that the user can select to change the grid.
  */
-let mode = modes.color;
+let mode = MODES.color;
 /**
  * Creates a row of a grid.
  * @returns The new row.
@@ -41,19 +40,19 @@ function createRow() {
   return row;
 }
 
+/**
+ * Creates the graph adjacencies for a given node.
+ * @param rootSquare The square/node of interest.
+ */
 function createAdjacencies(rootSquare) {
   const rootNodeId = getSquareId(rootSquare);
-  const rootNode = new Node(rootNodeId, rootSquare.style.backgroundColor);
+  const rootNode = graph.nodes[rootNodeId];
 
   // upper adjacency
   const upperAdjacencyId = rootNodeId - GRID_SIZE;
   if (upperAdjacencyId > 0) {
-    const upperAdjacentSquare = getSquareById(upperAdjacencyId);
-    const upperNode = new Node(
-      upperAdjacencyId,
-      upperAdjacentSquare.style.backgroundColor
-    );
-    graph.createAdjacency(rootNode, upperNode);
+    graph.createAdjacency(rootNode, graph.nodes[upperAdjacencyId]);
+
   }
 
   // rightmost adjacency
@@ -64,11 +63,7 @@ function createAdjacencies(rootSquare) {
     +rightmostAdjacentSquare.getAttribute("row") ===
       +rootSquare.getAttribute("row")
   ) {
-    const rightNode = new Node(
-      rightmostAdjacencyId,
-      rightmostAdjacentSquare.style.backgroundColor
-    );
-    graph.createAdjacency(rootNode, rightNode);
+    graph.createAdjacency(rootNode, graph.nodes[rightmostAdjacencyId]);
   }
 }
 
@@ -82,7 +77,7 @@ function createColumn(row) {
   square.setAttribute("id", `sq_${idCount++}`);
   square.setAttribute("row", `${rowCount}`);
 
-  square.style.backgroundColor = COLOR_WHITE;
+  square.style.backgroundColor = COLOR_WHITE.getRGB();
 
   square.classList.add("square");
   square.classList.add("undraggable");
@@ -131,9 +126,8 @@ document.addEventListener("mouseup", () => {
  * @param event The event that triggers the function.
  */
 function mouseIsMovingAndHeldDown(event) {
-  if (event.type === "mouseover" && mouseIsBeingHeld) {
-    return true;
-  }
+  if (event.type === "mouseover" && mouseIsBeingHeld) return true;
+  return false;
 }
 
 /**
@@ -143,32 +137,45 @@ function mouseIsMovingAndHeldDown(event) {
  */
 function updateGrid(event) {
   const squareId = getSquareId(event.target);
-  if (event.type === "click" && mode === modes.fill) {
+
+  if (event.type === "click" && mode === MODES.fill) {
     const rootNode = graph.nodes[squareId];
-    const squareColor = rootNode.color;
-    graph.breadthFirstSearch(rootNode, squareColor, getRGB(getRandomNumber(), getRandomNumber(), getRandomNumber()));
+    console.log(event.target);
+    console.log(rootNode);
+    const randomColor = new Color(
+      getRandomNumber(),
+      getRandomNumber(),
+      getRandomNumber()
+    );
+
+    graph.breadthFirstSearch(rootNode, randomColor);
     return;
   }
   if (event.type === "click") {
-    paintSquare(event.target, COLOR_BLACK);
-    graph.updateNodeColor(squareId, COLOR_BLACK);
+    updateNodeColorAndPaintSquare(squareId, event.target, COLOR_BLACK);
     return;
   }
+
   if (!mouseIsMovingAndHeldDown(event)) return;
-  if (mode === modes.color) {
-    paintSquare(event.target, COLOR_BLACK);
+
+  if (mode === MODES.color) {
+    updateNodeColorAndPaintSquare(squareId, event.target, COLOR_BLACK);
+    return;
   }
-  if (mode === modes.rainbow) {
+  if (mode === MODES.rainbow) {
     const randomRed = getRandomNumber();
     const randomGreen = getRandomNumber();
     const randomBlue = getRandomNumber();
+    const randomColor = new Color(randomRed, randomGreen, randomBlue);
 
-    paintSquare(event.target, getRGB(randomRed, randomGreen, randomBlue));
+    updateNodeColorAndPaintSquare(squareId, event.target, randomColor);
+    return;
   }
-  if (mode === modes.eraser) {
-    paintSquare(event.target, COLOR_WHITE);
+  if (mode === MODES.eraser) {
+    updateNodeColorAndPaintSquare(squareId, event.target, COLOR_WHITE);
+    return;
   }
-  graph.updateNodeColor(squareId, event.target.style.backgroundColor);
+
 }
 /**
  * Changes the background color of a square.
@@ -177,6 +184,17 @@ function updateGrid(event) {
  */
 function paintSquare(square, color) {
   square.style.backgroundColor = color;
+}
+
+/**
+ * Updates the graph's node color and it's square color.
+ * @param {number} squareId Identifier of the node/square.
+ * @param {*} square The square itself.
+ * @param {*} color The node/square new color.
+ */
+function updateNodeColorAndPaintSquare(squareId, square, color){
+  paintSquare(square, color.getRGB());
+  graph.updateNodeColor(squareId, color);
 }
 
 createGrid(GRID_SIZE);
@@ -189,30 +207,32 @@ const eraserButton = document.getElementById("eraser");
 const eraseAllButton = document.getElementById("erase-all");
 
 rainbowButton.addEventListener("click", () => {
-  mode = modes.rainbow;
+  mode = MODES.rainbow;
 });
 
 colorButton.addEventListener("click", () => {
-  mode = modes.color;
+  mode = MODES.color;
 });
 
 fillButton.addEventListener("click", () => {
-  mode = modes.fill;
+  mode = MODES.fill;
 });
 
 eraserButton.addEventListener("click", () => {
-  mode = modes.eraser;
+  mode = MODES.eraser;
 });
 
 eraseAllButton.addEventListener("click", () => {
   const squares = document.getElementsByClassName("square");
+
   [...squares].forEach((square) => {
-    paintSquare(square, COLOR_WHITE);
+    paintSquare(square, COLOR_WHITE.getRGB());
   });
 });
 
 showGridButton.addEventListener("click", () => {
   const squares = document.getElementsByClassName("square");
+
   [...squares].forEach((square) => {
     square.classList.toggle("show-tracks");
   });

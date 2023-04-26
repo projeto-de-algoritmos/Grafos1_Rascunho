@@ -1,6 +1,8 @@
+import { Color } from "./color.js";
+
 export const GRID_SIZE = 100;
-export const COLOR_WHITE = getRGB(255,255,255);
-export const COLOR_BLACK = getRGB(0,0,0);
+export const COLOR_WHITE = new Color(255,255,255);
+export const COLOR_BLACK = new Color(0,0,0);
 /**
  * Get a random integer between 
  * 0 and 255.
@@ -25,6 +27,12 @@ export function getSquareById(id) {
   return document.getElementById(`sq_${id}`);
 }
 
-export function getRGB(red, green, blue){
-  return `rgb(${red}, ${green}, ${blue})`;
+/**
+ * Check if two Colors are equal.
+ */
+export function colorsAreEqual(color1, color2) {
+  if(color1.red !== color2.red) return false;
+  if(color1.green !== color2.green) return false;
+  if(color1.blue !== color2.blue) return false;
+  return true;
 }
