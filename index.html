@@ -1,17 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rascunho</title>
-  <link rel="stylesheet" href="./styles/reset.css">
-  <link rel="stylesheet" href="./styles/fonts.css">
-  <link rel="stylesheet" href="./styles/styles.css">
-  <script src="./scripts/main.js" type="module" defer></script>
-</head>
-<body>
-  <h1>RASCUNHO</h1>
-  <div class="grid flex column"></div>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rascunho</title>
+    <link rel="stylesheet" href="./styles/reset.css" />
+    <link rel="stylesheet" href="./styles/fonts.css" />
+    <link rel="stylesheet" href="./styles/styles.css" />
+    <script src="./scripts/main.js" type="module" defer></script>
+  </head>
+  <body>
+    <div class="menu">
+      <ul>
+        <li>
+          <div class="dropdown">
+            <button class="dropbtn">
+              <img
+                class="icon-image"
+                title="Selecionar Tamanho do Pincel"
+                src="icons/brush.svg"
+              />
+            </button>
+            <div class="dropdown-content">
+              <button>
+                <img
+                  class="small-pencil"
+                  title="Tamanho Pequeno"
+                  src="icons/brush.svg"
+                />
+              </button>
+              <button>
+                <img
+                  class="medium-pencil"
+                  title="Tamanho Médio"
+                  src="icons/brush.svg"
+                />
+              </button>
+              <button>
+                <img
+                  class="big-pencil"
+                  title="Tamanho Grande"
+                  src="icons/brush.svg"
+                />
+              </button>
+            </div>
+        </li>
+        <li>
+          <button id="eraser">
+            <img class="icon-image" title="Borracha" src="icons/eraser.svg" />
+          </button>
+        </li>
+        <li>
+          <div>
+            <input id="color-picker" type="color" id="color"/>
+            <label for="color-picker" class="color-picker-button">
+              <img class="icon-image" title="Selecionar Cor" src="icons/palette.svg" />
+            </label>
+          </div>
+        </li>
+        <li>
+          <button id="fill">
+            <img
+              class="icon-image"
+              title="Preencher Área"
+              src="icons/fill.png"
+            />
+          </button>
+        </li>
+        <li>
+          <button id="show-grid">
+            <img
+              class="icon-image"
+              title="Ativar/Desativar Linhas"
+              src="icons/grid.png"
+            />
+          </button>
+        </li>
+        <li>
+          <button>
+            <img
+              class="icon-image"
+              title="Limpar Rascunho"
+              src="icons/undo.png"
+            />
+          </button>
+        </li>
+        <li>
+          <button>
+            <img
+              class="icon-image"
+              title="Limpar Rascunho"
+              src="icons/do.png"
+            />
+          </button>
+        </li>
+        <li>
+          <button id="erase-all">
+            <img
+              class="icon-image"
+              title="Limpar Rascunho"
+              src="icons/trash.png"
+            />
+          </button>
+        </li>
+      </ul>
+    </div>
+    <div class="grid flex column"></div>
+  </body>
 </html>
