@@ -161,17 +161,17 @@ input[type="color"] {
   transform: scale(1.2);
 }
 
-.small-pencil {
+.small-brush {
   width: 50%;
   height: 50%;
 }	
 
-.medium-pencil {
+.medium-brush {
   width: 80%;
   height: 80%;
 }	
 
-.big-pencil {
+.big-brush {
   width: 100%;
   height: 100%;
 }	
