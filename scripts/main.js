@@ -192,8 +192,10 @@ createGrid(GRID_SIZE);
 const rainbowButton = document.getElementById("rainbow");
 const showGridButton = document.getElementById("show-grid");
 const fillButton = document.getElementById("fill");
-const colorButton = document.getElementById("color-picker");
 const eraserButton = document.getElementById("eraser");
+const smallEraserButton = document.getElementById("small-eraser");
+const mediumEraserButton = document.getElementById("medium-eraser");
+const bigEraserButton = document.getElementById("big-eraser");
 const eraseAllButton = document.getElementById("erase-all");
 const brushButton = document.getElementById("brush");
 const smallBrushButton = document.getElementById("small-brush");
@@ -230,6 +232,22 @@ fillButton.addEventListener("click", () => {
 });
 
 eraserButton.addEventListener("click", () => {
+  currentBrushSize = "medium";
+  currentMode = MODES.eraser;
+});
+
+smallEraserButton.addEventListener("click", () => {
+  currentBrushSize = "small";
+  currentMode = MODES.eraser;
+});
+
+mediumEraserButton.addEventListener("click", () => {
+  currentBrushSize = "medium";
+  currentMode = MODES.eraser;
+});
+
+bigEraserButton.addEventListener("click", () => {
+  currentBrushSize = "big";
   currentMode = MODES.eraser;
 });
 
