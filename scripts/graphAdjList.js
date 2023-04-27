@@ -155,10 +155,39 @@ export class GraphAdjList {
    * Update the color of a node.
    * @param id The id of the node of interest.
    * @param {Color}newColor The new color of the node.
+   * @param {String}brushSize The size of brush.
    */
-  updateNodeColor(id, newColor) {
+  updateNodeColor(id, newColor, brushSize) {
     this.nodes[id].color = newColor;
-    const square = getSquareById(id);
-    square.style.backgroundColor = newColor.getRGB();
+    const squares = [getSquareById(id)];
+    const offsetsMeddium = [-1, 1, -99, 99, -100, 100, -101, 101];
+    const offsetsBig = [...offsetsMeddium, 98, -98, 102, -102, 199, -199, 201, -201];
+
+    switch (brushSize) {
+      case "small":
+        break;
+      case "medium":
+        offsetsMeddium.forEach(offset => {
+          this.nodes[id + offset].color = newColor;
+          squares.push(getSquareById(id + offset))
+        });
+        break;
+      case "big":
+        offsetsMeddium.forEach(offset => {
+            this.nodes[id + offset].color = newColor;
+            this.nodes[id + 2 * offset].color = newColor;
+            squares.push(getSquareById(id + offset));
+            squares.push(getSquareById(id + 2 * offset));
+        });
+        offsetsBig.forEach(offset => {
+          this.nodes[id + offset].color = newColor;
+          squares.push(getSquareById(id + offset));
+        });
+        break;
+    }
+
+    squares.forEach(square => {
+      square.style.backgroundColor = newColor.getRGB();
+    });
   }
 }
