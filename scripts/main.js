@@ -192,63 +192,43 @@ createGrid(GRID_SIZE);
 const rainbowButton = document.getElementById("rainbow");
 const showGridButton = document.getElementById("show-grid");
 const fillButton = document.getElementById("fill");
-const eraserButton = document.getElementById("eraser");
-const smallEraserButton = document.getElementById("small-eraser");
-const mediumEraserButton = document.getElementById("medium-eraser");
-const bigEraserButton = document.getElementById("big-eraser");
-const eraseAllButton = document.getElementById("erase-all");
-const brushButton = document.getElementById("brush");
-const smallBrushButton = document.getElementById("small-brush");
-const mediumBrushButton = document.getElementById("medium-brush");
-const bigBrushButton = document.getElementById("big-brush");
 const colorPicker = document.querySelector("#color-picker");
+const brushButtons = [
+  { id: "brush", size: "medium" },
+  { id: "small-brush", size: "small" },
+  { id: "medium-brush", size: "medium" },
+  { id: "big-brush", size: "big" },
+];
+
+const eraserButtons = [
+  { id: "eraser", size: "medium" },
+  { id: "small-eraser", size: "small" },
+  { id: "medium-eraser", size: "medium" },
+  { id: "big-eraser", size: "big" },
+];
+
+brushButtons.forEach(button => {
+  const element = document.getElementById(button.id);
+  element.addEventListener("click", () => {
+    currentBrushSize = button.size;
+    currentMode = MODES.color;
+  });
+});
+
+eraserButtons.forEach(button => {
+  const element = document.getElementById(button.id);
+  element.addEventListener("click", () => {
+    currentBrushSize = button.size;
+    currentMode = MODES.eraser;
+  });
+});
 
 rainbowButton.addEventListener("click", () => {
   currentMode = MODES.rainbow;
 });
 
-brushButton.addEventListener("click", () => {
-  currentBrushSize = "medium";
-  currentMode = MODES.color;
-});
-
-smallBrushButton.addEventListener("click", () => {
-  currentBrushSize = "small";
-  currentMode = MODES.color;
-});
-
-mediumBrushButton.addEventListener("click", () => {
-  currentBrushSize = "medium";
-  currentMode = MODES.color;
-});
-
-bigBrushButton.addEventListener("click", () => {
-  currentBrushSize = "big";
-  currentMode = MODES.color;
-});
-
 fillButton.addEventListener("click", () => {
   currentMode = MODES.fill;
-});
-
-eraserButton.addEventListener("click", () => {
-  currentBrushSize = "medium";
-  currentMode = MODES.eraser;
-});
-
-smallEraserButton.addEventListener("click", () => {
-  currentBrushSize = "small";
-  currentMode = MODES.eraser;
-});
-
-mediumEraserButton.addEventListener("click", () => {
-  currentBrushSize = "medium";
-  currentMode = MODES.eraser;
-});
-
-bigEraserButton.addEventListener("click", () => {
-  currentBrushSize = "big";
-  currentMode = MODES.eraser;
 });
 
 colorPicker.addEventListener("change", () => {
