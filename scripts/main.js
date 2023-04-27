@@ -224,6 +224,7 @@ colorPicker.addEventListener("change", () => {
 });
 
 eraseAllButton.addEventListener("click", () => {
+  mode = MODES.color;
   const squares = document.getElementsByClassName("square");
 
   [...squares].forEach((square) => {
@@ -239,3 +240,7 @@ showGridButton.addEventListener("click", () => {
     square.classList.toggle("show-tracks");
   });
 });
+
+export function getMode() {
+  return mode;
+}
