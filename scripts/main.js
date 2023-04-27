@@ -193,13 +193,13 @@ const rainbowButton = document.getElementById("rainbow");
 const showGridButton = document.getElementById("show-grid");
 const fillButton = document.getElementById("fill");
 const colorPicker = document.querySelector("#color-picker");
+const eraseAllButton = document.getElementById("erase-all");
 const brushButtons = [
   { id: "brush", size: "medium" },
   { id: "small-brush", size: "small" },
   { id: "medium-brush", size: "medium" },
   { id: "big-brush", size: "big" },
 ];
-
 const eraserButtons = [
   { id: "eraser", size: "medium" },
   { id: "small-eraser", size: "small" },
