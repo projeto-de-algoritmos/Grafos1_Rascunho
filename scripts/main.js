@@ -25,6 +25,10 @@ const MODES = {
   eraser: "eraser",
   fill: "fill",
 };
+/** The `currentBrushSize` variable controls the size
+ * that the user is currently using in brush.
+ */
+let currentBrushSize = "medium";
 /** The `currentMode` variable controls the mode
  * that the user is currently using.
  */
@@ -180,7 +184,7 @@ function updateGrid(event) {
  * @param {*} color The node/square new color.
  */
 function updateNodeColorAndPaintSquare(squareId, color) {
-  graph.updateNodeColor(squareId, color);
+  graph.updateNodeColor(squareId, color, currentBrushSize);
 }
 
 createGrid(GRID_SIZE);
@@ -191,18 +195,33 @@ const fillButton = document.getElementById("fill");
 const colorButton = document.getElementById("color-picker");
 const eraserButton = document.getElementById("eraser");
 const eraseAllButton = document.getElementById("erase-all");
-const pencilButton = document.getElementById("pencil");
+const brushButton = document.getElementById("brush");
+const smallBrushButton = document.getElementById("small-brush");
+const mediumBrushButton = document.getElementById("medium-brush");
+const bigBrushButton = document.getElementById("big-brush");
 const colorPicker = document.querySelector("#color-picker");
 
 rainbowButton.addEventListener("click", () => {
   currentMode = MODES.rainbow;
 });
 
-colorButton.addEventListener("click", () => {
+brushButton.addEventListener("click", () => {
+  currentBrushSize = "medium";
   currentMode = MODES.color;
 });
 
-pencilButton.addEventListener("click", () => {
+smallBrushButton.addEventListener("click", () => {
+  currentBrushSize = "small";
+  currentMode = MODES.color;
+});
+
+mediumBrushButton.addEventListener("click", () => {
+  currentBrushSize = "medium";
+  currentMode = MODES.color;
+});
+
+bigBrushButton.addEventListener("click", () => {
+  currentBrushSize = "big";
   currentMode = MODES.color;
 });
 
@@ -215,7 +234,6 @@ eraserButton.addEventListener("click", () => {
 });
 
 colorPicker.addEventListener("change", () => {
-  currentMode = MODES.color;
   currentColor = new Color(
     parseInt(colorPicker.value.substr(1, 2), 16),
     parseInt(colorPicker.value.substr(3, 2), 16),
