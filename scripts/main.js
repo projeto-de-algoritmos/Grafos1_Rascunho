@@ -128,6 +128,8 @@ function mouseIsMovingAndHeldDown(event) {
   return false;
 }
 
+let currentColor = COLOR_BLACK;
+
 /**
  * Updates the grid.
  * @param event The event that triggers the function.
@@ -138,27 +140,22 @@ function updateGrid(event) {
 
   if (event.type === "click") {
     if (mode === MODES.fill) {
-      const randomColor = new Color(
-        getRandomNumber(),
-        getRandomNumber(),
-        getRandomNumber()
-      );
 
       graph.breadthFirstSearch(
         squareId,
         graph.nodes[squareId].color,
-        randomColor
+        currentColor
       );
       return;
     }
-    updateNodeColorAndPaintSquare(squareId, event.target, COLOR_BLACK);
+    updateNodeColorAndPaintSquare(squareId, event.target, currentColor);
     return;
   }
 
   if (!mouseIsMovingAndHeldDown(event)) return;
 
   if (mode === MODES.color) {
-    updateNodeColorAndPaintSquare(squareId, event.target, COLOR_BLACK);
+    updateNodeColorAndPaintSquare(squareId, event.target, currentColor);
     return;
   }
   if (mode === MODES.rainbow) {
@@ -194,6 +191,7 @@ const colorButton = document.getElementById("color-picker");
 const eraserButton = document.getElementById("eraser");
 const eraseAllButton = document.getElementById("erase-all");
 const pencilButton = document.getElementById("pencil");
+const colorPicker = document.querySelector("#color-picker");
 
 rainbowButton.addEventListener("click", () => {
   mode = MODES.rainbow;
@@ -213,6 +211,15 @@ fillButton.addEventListener("click", () => {
 
 eraserButton.addEventListener("click", () => {
   mode = MODES.eraser;
+});
+
+colorPicker.addEventListener("change", () => {
+  mode = MODES.color;
+  currentColor = new Color(
+    parseInt(colorPicker.value.substr(1, 2), 16),
+    parseInt(colorPicker.value.substr(3, 2), 16),
+    parseInt(colorPicker.value.substr(5, 2), 16)
+  );
 });
 
 eraseAllButton.addEventListener("click", () => {
