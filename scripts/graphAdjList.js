@@ -1,6 +1,6 @@
 import { Edge } from "./edge.js";
 import { Queue } from "./queue.js";
-import { getSquareById, colorsAreEqual } from "./utils.js";
+import { getSquareById, colorsAreEqual, offsetsMeddium, offsetsBig } from "./utils.js";
 import { getMode } from './main.js';
 /**
  * `Adjacency List` implementation of a `Graph`.
@@ -134,11 +134,10 @@ export class GraphAdjList {
     queue.enqueue(this.nodes[id]);
 
     visitedNodes.add(+id);
-
-    while (!queue.isEmpty() && getMode() != "eraseAll") {
+    while (!queue.isEmpty() && getMode() !== "eraseAll") {
       const node = queue.dequeue();
       await new Promise((r) => setTimeout(r, 2));
-      if (getMode() != "eraseAll")
+      if (getMode() !== "eraseAll")
         this.updateNodeColor(node.id, newColor);
 
       for (const adjacentNode of this.adjacencyList[node.id]) {
@@ -162,16 +161,18 @@ export class GraphAdjList {
   updateNodeColor(id, newColor, brushSize) {
     this.nodes[id].color = newColor;
     const squares = [getSquareById(id)];
-    const offsetsMeddium = [-1, 1, -99, 99, -100, 100, -101, 101];
-    const offsetsBig = [...offsetsMeddium, 98, -98, 102, -102, 199, -199, 201, -201];
 
+    /** 
+     * if this method is called from the click event at showGridButton,
+     * then the following "switch" is ignored (since brushSize is undefined).
+     */
     switch (brushSize) {
       case "small":
         break;
       case "medium":
         offsetsMeddium.forEach(offset => {
           this.nodes[id + offset].color = newColor;
-          squares.push(getSquareById(id + offset))
+          squares.push(getSquareById(id + offset));
         });
         break;
       case "big":

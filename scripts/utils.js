@@ -3,6 +3,9 @@ import { Color } from "./color.js";
 export const GRID_SIZE = 100;
 export const COLOR_WHITE = new Color(255, 255, 255);
 export const COLOR_BLACK = new Color(0, 0, 0);
+export const offsetsMedium = [-1, 1, -99, 99, -100, 100, -101, 101];
+export const offsetsBig = [...offsetsMedium, 98, -98, 102, -102, 199, -199, 201, -201];
+
 /**
  * Get a random integer between
  * 0 and 255.
