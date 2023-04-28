@@ -1,6 +1,7 @@
 import { Edge } from "./edge.js";
 import { Queue } from "./queue.js";
 import { getSquareById, colorsAreEqual } from "./utils.js";
+import { getMode } from './main.js';
 /**
  * `Adjacency List` implementation of a `Graph`.
  * There are two rules of usage:
@@ -134,10 +135,11 @@ export class GraphAdjList {
 
     visitedNodes.add(+id);
 
-    while (!queue.isEmpty()) {
+    while (!queue.isEmpty() && getMode() != "eraseAll") {
       const node = queue.dequeue();
       await new Promise((r) => setTimeout(r, 2));
-      this.updateNodeColor(node.id, newColor);
+      if (getMode() != "eraseAll")
+        this.updateNodeColor(node.id, newColor);
 
       for (const adjacentNode of this.adjacencyList[node.id]) {
         if (

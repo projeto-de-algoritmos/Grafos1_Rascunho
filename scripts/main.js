@@ -24,6 +24,7 @@ const MODES = {
   rainbow: "rainbow",
   eraser: "eraser",
   fill: "fill",
+  eraseAll: "eraseAll",
 };
 /** The `currentBrushSize` variable controls the size
  * that the user is currently using in brush.
@@ -240,6 +241,7 @@ colorPicker.addEventListener("change", () => {
 });
 
 eraseAllButton.addEventListener("click", () => {
+  currentMode = MODES.eraseAll;
   const squares = document.getElementsByClassName("square");
 
   [...squares].forEach((square) => {
@@ -255,3 +257,7 @@ showGridButton.addEventListener("click", () => {
     square.classList.toggle("show-tracks");
   });
 });
+
+export function getMode() {
+  return currentMode;
+}

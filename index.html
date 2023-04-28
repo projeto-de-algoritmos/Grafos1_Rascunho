@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="./styles/fonts.css" />
     <link rel="stylesheet" href="./styles/styles.css" />
     <script src="./scripts/main.js" type="module" defer></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="./scripts/export.js" type="module" defer></script>
   </head>
   <body>
     <div class="menu">
@@ -131,6 +133,15 @@
           </button>
         </li>
         <li>
+          <button id="export">
+            <img
+              class="icon-image"
+              title="Exportar Rascunho"
+              src="icons/export.png"
+            />
+          </button>
+        </li>
+        <li>
           <button id="erase-all">
             <img
               class="icon-image"
@@ -141,6 +152,6 @@
         </li>
       </ul>
     </div>
-    <div class="grid flex column"></div>
+    <div class="grid flex column" id="grid"></div>
   </body>
 </html>
