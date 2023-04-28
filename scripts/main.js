@@ -24,6 +24,7 @@ const MODES = {
   rainbow: "rainbow",
   eraser: "eraser",
   fill: "fill",
+  eraseAll: "eraseAll",
 };
 /** The `currentMode` variable controls the mode
  * that the user is currently using.
@@ -224,7 +225,7 @@ colorPicker.addEventListener("change", () => {
 });
 
 eraseAllButton.addEventListener("click", () => {
-  mode = MODES.color;
+  currentMode = MODES.eraseAll;
   const squares = document.getElementsByClassName("square");
 
   [...squares].forEach((square) => {
@@ -242,5 +243,5 @@ showGridButton.addEventListener("click", () => {
 });
 
 export function getMode() {
-  return mode;
+  return currentMode;
 }
