@@ -18,7 +18,7 @@ body {
 }
 
 .show-tracks {
-  border: 1px solid rgb(214, 214, 214);
+  border: 1px solid rgb(214, 214, 214, .3);
 }
 
 .grid {
