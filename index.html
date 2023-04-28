@@ -9,13 +9,16 @@
     <link rel="stylesheet" href="./styles/fonts.css" />
     <link rel="stylesheet" href="./styles/styles.css" />
     <script src="./scripts/main.js" type="module" defer></script>
+    <script src="./scripts/cursor.js" type="module" defer></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="./scripts/export.js" type="module" defer></script>
   </head>
   <body>
     <div class="menu">
       <ul>
         <li>
           <div class="dropdown">
-            <button class="dropbtn" id="pencil">
+            <button class="dropbtn" id="brush">
               <img
                 class="icon-image"
                 title="Selecionar Tamanho do Pincel"
@@ -23,98 +26,128 @@
               />
             </button>
             <div class="dropdown-content">
-              <button>
+              <button id="small-brush">
                 <img
-                  class="small-pencil"
+                  class="small-brush"
                   title="Tamanho Pequeno"
                   src="icons/brush.svg"
                 />
               </button>
-              <button>
+              <button id="medium-brush">
                 <img
-                  class="medium-pencil"
+                  class="medium-brush"
                   title="Tamanho Médio"
                   src="icons/brush.svg"
                 />
               </button>
-              <button>
+              <button id="big-brush">
                 <img
-                  class="big-pencil"
+                  class="big-brush"
                   title="Tamanho Grande"
                   src="icons/brush.svg"
                 />
               </button>
             </div>
-        </li>
-        <li>
-          <button id="eraser">
-            <img class="icon-image" title="Borracha" src="icons/eraser.svg" />
-          </button>
-        </li>
-        <li>
-          <div>
-            <input id="color-picker" type="color"/>
-            <label for="color-picker" class="color-picker-button">
-              <img class="icon-image" title="Selecionar Cor" src="icons/palette.svg" />
-            </label>
           </div>
         </li>
         <li>
+          <div class="dropdown">
+            <button class="dropbtn" id="eraser">
+              <img class="icon-image" title="Selecionar Tamanho da Borracha" src="icons/eraser.svg" />
+            </button>
+            <div class="dropdown-content">
+              <button id="small-eraser">
+                <img
+                  class="small-brush"
+                  title="Tamanho Pequeno"
+                  src="icons/eraser.svg"
+                />
+              </button>
+              <button id="medium-eraser">
+                <img
+                  class="medium-brush"
+                  title="Tamanho Médio"
+                  src="icons/eraser.svg"
+                />
+              </button>
+              <button id="big-eraser">
+                <img
+                  class="big-brush"
+                  title="Tamanho Grande"
+                  src="icons/eraser.svg"
+                />
+              </button>
+            </div>
+          </div>
+        </li>
+        <li title="Selecionar Cor">
+          <div>
+            <input id="color-picker" type="color"/>
+            <label for="color-picker" class="color-picker-button">
+              <img class="icon-image" src="icons/palette.svg" />
+            </label>
+          </div>
+        </li>
+        <li title="Preencher Área">
           <button id="fill">
             <img
-              class="icon-image"
-              title="Preencher Área"
+              class="icon-image"      
               src="icons/fill.png"
             />
           </button>
         </li>
-        <li>
+        <li title="Ativar/Desativar Linhas">
           <button id="show-grid">
             <img
               class="icon-image"
-              title="Ativar/Desativar Linhas"
               src="icons/grid.png"
             />
           </button>
         </li>
-        <li>
-          <button id="rainbow">
+        <li title="Arco Irís">
+          <button id="rainbow" >
             <img
               class="icon-image"
-              title="Arco Irís"
               src="icons/rainbow.png"
             />
           </button>
         </li>
-        <li>
+        <li title="Desfazer">
           <button>
             <img
               class="icon-image"
-              title="Desfazer"
               src="icons/undo.png"
             />
           </button>
         </li>
-        <li>
+        <li title="Refazer">
           <button>
             <img
               class="icon-image"
-              title="Fazer"
               src="icons/do.png"
             />
           </button>
         </li>
-        <li>
+        <li title="Exportar Rascunho">
+          <button id="export">
+            <img
+              class="icon-image"
+              src="icons/export.png"
+            />
+          </button>
+        </li>
+        <li title="Limpar Rascunho">
           <button id="erase-all">
             <img
               class="icon-image"
-              title="Limpar Rascunho"
               src="icons/trash.png"
             />
           </button>
         </li>
       </ul>
     </div>
-    <div class="grid flex column"></div>
+    <div class="grid flex column" id="grid">
+      <div id="cursor-icon"></div>
+    </div>
   </body>
 </html>

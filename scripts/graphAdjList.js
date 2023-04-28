@@ -1,6 +1,7 @@
 import { Edge } from "./edge.js";
 import { Queue } from "./queue.js";
-import { getSquareById, colorsAreEqual } from "./utils.js";
+import { getSquareById, colorsAreEqual, offsetsMedium, offsetsBig } from "./utils.js";
+import { getMode } from './main.js';
 /**
  * `Adjacency List` implementation of a `Graph`.
  * There are two rules of usage:
@@ -133,11 +134,11 @@ export class GraphAdjList {
     queue.enqueue(this.nodes[id]);
 
     visitedNodes.add(+id);
-
-    while (!queue.isEmpty()) {
+    while (!queue.isEmpty() && getMode() !== "eraseAll") {
       const node = queue.dequeue();
       await new Promise((r) => setTimeout(r, 2));
-      this.updateNodeColor(node.id, newColor);
+      if (getMode() !== "eraseAll")
+        this.updateNodeColor(node.id, newColor);
 
       for (const adjacentNode of this.adjacencyList[node.id]) {
         if (
@@ -155,10 +156,40 @@ export class GraphAdjList {
    * Update the color of a node.
    * @param id The id of the node of interest.
    * @param {Color}newColor The new color of the node.
+   * @param {String}brushSize The size of brush.
    */
-  updateNodeColor(id, newColor) {
+  updateNodeColor(id, newColor, brushSize) {
     this.nodes[id].color = newColor;
-    const square = getSquareById(id);
-    square.style.backgroundColor = newColor.getRGB();
+    const squares = [getSquareById(id)];
+    /** 
+     * if this method is called from the click event at showGridButton,
+     * then the following "switch" is ignored (since brushSize is undefined).
+     */
+    switch (brushSize) {
+      case "small":
+        break;
+      case "medium":
+        offsetsMedium.forEach(offset => {
+          this.nodes[id + offset].color = newColor;
+          squares.push(getSquareById(id + offset));
+        });
+        break;
+      case "big":
+        offsetsMedium.forEach(offset => {
+            this.nodes[id + offset].color = newColor;
+            this.nodes[id + 2 * offset].color = newColor;
+            squares.push(getSquareById(id + offset));
+            squares.push(getSquareById(id + 2 * offset));
+        });
+        offsetsBig.forEach(offset => {
+          this.nodes[id + offset].color = newColor;
+          squares.push(getSquareById(id + offset));
+        });
+        break;
+    }
+
+    squares.forEach(square => {
+      square.style.backgroundColor = newColor.getRGB();
+    });
   }
 }

@@ -24,11 +24,22 @@ const MODES = {
   rainbow: "rainbow",
   eraser: "eraser",
   fill: "fill",
+  eraseAll: "eraseAll",
 };
+/** The `currentBrushSize` variable controls the size
+ * that the user is currently using in brush.
+ */
+let currentBrushSize = "medium";
 /** The `currentMode` variable controls the mode
  * that the user is currently using.
  */
 let currentMode = MODES.color;
+/**
+ * Export this module's mode to other modules.
+ */
+export function getMode() {
+  return currentMode;
+}
 /**
  * The `currentColor` variable controls the color 
  * that the user is currently using.
@@ -117,6 +128,10 @@ function createGrid(size) {
  * drawn into if the user is moving the mouse while
  * holding it down.
  */
+/**
+ * Variable that controls if the left mouse button
+ * is being pressed.
+ */
 let mouseIsBeingHeld = false;
 document.addEventListener("mousedown", () => {
   mouseIsBeingHeld = true;
@@ -132,7 +147,6 @@ function mouseIsMovingAndHeldDown(event) {
   if (event.type === "mouseover" && mouseIsBeingHeld) return true;
   return false;
 }
-
 /**
  * Updates the grid.
  * @param event The event that triggers the function.
@@ -150,14 +164,14 @@ function updateGrid(event) {
       );
       return;
     }
-    updateNodeColorAndPaintSquare(squareId, currentColor);
+    graph.updateNodeColor(squareId, currentColor, currentBrushSize);
     return;
   }
 
   if (!mouseIsMovingAndHeldDown(event)) return;
 
   if (currentMode === MODES.color) {
-    updateNodeColorAndPaintSquare(squareId, currentColor);
+    graph.updateNodeColor(squareId, currentColor, currentBrushSize);
     return;
   }
   if (currentMode === MODES.rainbow) {
@@ -166,21 +180,13 @@ function updateGrid(event) {
     const randomBlue = getRandomNumber();
     const randomColor = new Color(randomRed, randomGreen, randomBlue);
 
-    updateNodeColorAndPaintSquare(squareId, randomColor);
+    graph.updateNodeColor(squareId, randomColor, currentBrushSize);
     return;
   }
   if (currentMode === MODES.eraser) {
-    updateNodeColorAndPaintSquare(squareId, COLOR_WHITE);
+    graph.updateNodeColor(squareId, COLOR_WHITE, currentBrushSize);
     return;
   }
-}
-/**
- * Updates the graph's node color and it's square color.
- * @param {number} squareId Identifier of the node/square.
- * @param {*} color The node/square new color.
- */
-function updateNodeColorAndPaintSquare(squareId, color) {
-  graph.updateNodeColor(squareId, color);
 }
 
 createGrid(GRID_SIZE);
@@ -188,34 +194,55 @@ createGrid(GRID_SIZE);
 const rainbowButton = document.getElementById("rainbow");
 const showGridButton = document.getElementById("show-grid");
 const fillButton = document.getElementById("fill");
-const colorButton = document.getElementById("color-picker");
-const eraserButton = document.getElementById("eraser");
-const eraseAllButton = document.getElementById("erase-all");
-const pencilButton = document.getElementById("pencil");
 const colorPicker = document.querySelector("#color-picker");
+const eraseAllButton = document.getElementById("erase-all");
+/**
+ * Object to hold the brush buttons and add the event
+ * listener for each of them using a loop.
+ */
+const brushButtons = [
+  { id: "brush", size: "medium" },
+  { id: "small-brush", size: "small" },
+  { id: "medium-brush", size: "medium" },
+  { id: "big-brush", size: "big" },
+];
+/**
+ * Object to hold the eraser buttons and add the event
+ * listener for each of them using a loop.
+ */
+const eraserButtons = [
+  { id: "eraser", size: "medium" },
+  { id: "small-eraser", size: "small" },
+  { id: "medium-eraser", size: "medium" },
+  { id: "big-eraser", size: "big" },
+];
+
+brushButtons.forEach(button => {
+  const element = document.getElementById(button.id);
+  element.addEventListener("click", () => {
+    currentBrushSize = button.size;
+    currentMode = MODES.color;
+  });
+});
+
+eraserButtons.forEach(button => {
+  const element = document.getElementById(button.id);
+  element.addEventListener("click", () => {
+    currentBrushSize = button.size;
+    currentMode = MODES.eraser;
+  });
+});
 
 rainbowButton.addEventListener("click", () => {
   currentMode = MODES.rainbow;
-});
-
-colorButton.addEventListener("click", () => {
-  currentMode = MODES.color;
-});
-
-pencilButton.addEventListener("click", () => {
-  currentMode = MODES.color;
 });
 
 fillButton.addEventListener("click", () => {
   currentMode = MODES.fill;
 });
 
-eraserButton.addEventListener("click", () => {
-  currentMode = MODES.eraser;
-});
-
 colorPicker.addEventListener("change", () => {
-  currentMode = MODES.color;
+  /**Color in the hexadecimal value. */
   currentColor = new Color(
     parseInt(colorPicker.value.substr(1, 2), 16),
     parseInt(colorPicker.value.substr(3, 2), 16),
@@ -224,6 +251,7 @@ colorPicker.addEventListener("change", () => {
 });
 
 eraseAllButton.addEventListener("click", () => {
+  currentMode = MODES.eraseAll;
   const squares = document.getElementsByClassName("square");
 
   [...squares].forEach((square) => {

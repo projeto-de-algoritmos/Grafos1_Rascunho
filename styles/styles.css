@@ -18,12 +18,12 @@ body {
 }
 
 .show-tracks {
-  border: 1px solid gray;
+  border: 1px solid rgb(214, 214, 214, .3);
 }
 
 .grid {
   width: 100vw;
-  height: 100vw;
+  height: 100vh;
   cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><line x1="0" y1="8" x2="16" y2="8" stroke="black" stroke-width="2"/><line x1="8" y1="0" x2="8" y2="16" stroke="black" stroke-width="2"/></svg>') 10 10, crosshair;
 }
 
@@ -78,6 +78,10 @@ h1 {
 
 .menu button:hover .icon-image {
   transform: scale(1.2);
+}
+
+.menu button:active .icon-image {
+  transform: scale(1);
 }
 
 .color-picker-button {
@@ -161,17 +165,30 @@ input[type="color"] {
   transform: scale(1.2);
 }
 
-.small-pencil {
+.dropdown-content button:active {
+  transform: scale(1);
+}
+
+.small-brush {
   width: 50%;
   height: 50%;
 }	
 
-.medium-pencil {
+.medium-brush {
   width: 80%;
   height: 80%;
 }	
 
-.big-pencil {
+.big-brush {
   width: 100%;
   height: 100%;
 }	
+
+#cursor-icon {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  pointer-events: none;
+}
