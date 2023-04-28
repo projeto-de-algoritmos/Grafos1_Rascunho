@@ -1,6 +1,6 @@
 import { Edge } from "./edge.js";
 import { Queue } from "./queue.js";
-import { getSquareById, colorsAreEqual, offsetsMeddium, offsetsBig } from "./utils.js";
+import { getSquareById, colorsAreEqual, offsetsMedium, offsetsBig } from "./utils.js";
 import { getMode } from './main.js';
 /**
  * `Adjacency List` implementation of a `Graph`.
@@ -161,7 +161,6 @@ export class GraphAdjList {
   updateNodeColor(id, newColor, brushSize) {
     this.nodes[id].color = newColor;
     const squares = [getSquareById(id)];
-
     /** 
      * if this method is called from the click event at showGridButton,
      * then the following "switch" is ignored (since brushSize is undefined).
@@ -170,13 +169,13 @@ export class GraphAdjList {
       case "small":
         break;
       case "medium":
-        offsetsMeddium.forEach(offset => {
+        offsetsMedium.forEach(offset => {
           this.nodes[id + offset].color = newColor;
           squares.push(getSquareById(id + offset));
         });
         break;
       case "big":
-        offsetsMeddium.forEach(offset => {
+        offsetsMedium.forEach(offset => {
             this.nodes[id + offset].color = newColor;
             this.nodes[id + 2 * offset].color = newColor;
             squares.push(getSquareById(id + offset));
