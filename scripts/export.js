@@ -6,7 +6,7 @@ function exportGrid() {
   
     html2canvas(grid).then(function(canvas) {
       const link = document.createElement("a");
-      link.download = "grid.png";
+      link.download = "rascunho.png";
       link.href = canvas.toDataURL("image/png");
       link.click();
     });
