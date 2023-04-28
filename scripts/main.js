@@ -35,6 +35,10 @@ let currentBrushSize = "medium";
  */
 let currentMode = MODES.color;
 /**
+ * Control for the grid filling timeout.
+ */
+let timeout = false;
+/**
  * Export this module's mode to other modules.
  */
 export function getMode() {
@@ -160,7 +164,9 @@ function updateGrid(event) {
       graph.breadthFirstSearch(
         squareId,
         graph.nodes[squareId].color,
-        currentColor
+        currentColor,
+        new Set(),
+        timeout
       );
       return;
     }
@@ -196,6 +202,7 @@ const showGridButton = document.getElementById("show-grid");
 const fillButton = document.getElementById("fill");
 const colorPicker = document.querySelector("#color-picker");
 const eraseAllButton = document.getElementById("erase-all");
+const timeoutButton = document.getElementById("timeout");
 /**
  * Object to hold the brush buttons and add the event
  * listener for each of them using a loop.
@@ -266,4 +273,8 @@ showGridButton.addEventListener("click", () => {
   [...squares].forEach((square) => {
     square.classList.toggle("show-tracks");
   });
+});
+
+timeoutButton.addEventListener('click', () => {
+  timeout = !timeout;
 });

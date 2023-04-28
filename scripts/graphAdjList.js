@@ -122,13 +122,15 @@ export class GraphAdjList {
    * @param newColor The color that the node shall be filled with.
    * @param startingColor The color of the starting node. This is the color that should be painted.
    * @param visitedNodes A set of ids of nodes that have already been visited.
+   * @param {boolean} timeout Controls if there is the filling effect. 
    * @returns A set of the visited nodes in the order they were visited.
    */
   async breadthFirstSearch(
     id,
     startingColor,
     newColor,
-    visitedNodes = new Set()
+    visitedNodes = new Set(),
+    timeout = false
   ) {
     const queue = new Queue();
     queue.enqueue(this.nodes[id]);
@@ -136,7 +138,7 @@ export class GraphAdjList {
     visitedNodes.add(+id);
     while (!queue.isEmpty() && getMode() !== "eraseAll") {
       const node = queue.dequeue();
-      await new Promise((r) => setTimeout(r, 2));
+      if(timeout) await new Promise((r) => setTimeout(r, 2));
       if (getMode() !== "eraseAll")
         this.updateNodeColor(node.id, newColor);
 
