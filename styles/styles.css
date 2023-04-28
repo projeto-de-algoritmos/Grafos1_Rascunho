@@ -80,6 +80,10 @@ h1 {
   transform: scale(1.2);
 }
 
+.menu button:active .icon-image {
+  transform: scale(1);
+}
+
 .color-picker-button {
   display: inline-block;
   cursor: pointer;
@@ -159,6 +163,10 @@ input[type="color"] {
 
 .dropdown-content button:hover {
   transform: scale(1.2);
+}
+
+.dropdown-content button:active {
+  transform: scale(1);
 }
 
 .small-brush {
