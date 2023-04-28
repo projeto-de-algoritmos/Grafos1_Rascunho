@@ -135,10 +135,10 @@ export class GraphAdjList {
 
     visitedNodes.add(+id);
 
-    while (!queue.isEmpty() && getMode() === "fill") {
+    while (!queue.isEmpty() && getMode() != "eraseAll") {
       const node = queue.dequeue();
       await new Promise((r) => setTimeout(r, 2));
-      if (getMode() === "fill")
+      if (getMode() != "eraseAll")
         this.updateNodeColor(node.id, newColor);
 
       for (const adjacentNode of this.adjacencyList[node.id]) {
