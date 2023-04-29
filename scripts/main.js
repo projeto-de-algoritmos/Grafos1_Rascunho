@@ -258,6 +258,7 @@ colorPicker.addEventListener("change", () => {
 });
 
 eraseAllButton.addEventListener("click", () => {
+  if(!confirm('Você deseja excluir o rascunho?')) return;
   currentMode = MODES.eraseAll;
   const squares = document.getElementsByClassName("square");
 
