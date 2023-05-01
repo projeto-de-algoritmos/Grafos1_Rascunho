@@ -22,7 +22,13 @@
 
 ## Screenshots
 
+https://user-images.githubusercontent.com/54439337/235524118-618b307d-1975-4428-90a5-24787ef25a93.mp4
 
+https://user-images.githubusercontent.com/54439337/235524435-9df3ac70-9c4a-432f-af39-1f81894c4c01.mp4
+
+https://user-images.githubusercontent.com/54439337/235524623-064edf2b-1f09-4a82-a28c-8f7c7603570b.mp4
+
+https://user-images.githubusercontent.com/54439337/235525073-88b18f7e-c982-404d-8748-2018f22e9ddf.mp4
 
 ## Tecnologias 
 
