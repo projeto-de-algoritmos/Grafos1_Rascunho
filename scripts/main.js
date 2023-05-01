@@ -203,6 +203,8 @@ const fillButton = document.getElementById("fill");
 const colorPicker = document.querySelector("#color-picker");
 const eraseAllButton = document.getElementById("erase-all");
 const timeoutButton = document.getElementById("timeout");
+const doButton = document.getElementById("do");
+const undoButton = document.getElementById("undo");
 /**
  * Object to hold the brush buttons and add the event
  * listener for each of them using a loop.
@@ -279,3 +281,5 @@ showGridButton.addEventListener("click", () => {
 timeoutButton.addEventListener('click', () => {
   timeout = !timeout;
 });
+undoButton.addEventListener('click',()=>alert('Não implementado!'));
+doButton.addEventListener('click', ()=>alert('Não implementado!'));
