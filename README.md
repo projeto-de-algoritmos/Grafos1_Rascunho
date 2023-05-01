@@ -52,8 +52,6 @@ Acesse o Gitpages do projeto: [https://projeto-de-algoritmos.github.io/Grafos1_R
 ## Vídeo de Apresentação
 
 - [Link para vídeo de apresentação do projeto](https://youtu.be/pno71yiAdTo)
+- O vídeo de apresentação também pode ser encontrado no arquivo `presentation-video.mp4`, na pasta `presentation_video`. 
 
 Obs: Como o vídeo ficou grande, não conseguimos fazer o upload do arquivo inteiro no git, entáo cortamos o final para fazer o upload.
-
-## Outros 
-Quaisquer outras informações sobre seu projeto podem ser descritas abaixo.
