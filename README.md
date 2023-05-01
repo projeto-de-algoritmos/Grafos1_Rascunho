@@ -46,5 +46,7 @@ Acesse o Gitpages do projeto: [https://projeto-de-algoritmos.github.io/Grafos1_R
 
 - [Link para vídeo de apresentação do projeto](https://youtu.be/pno71yiAdTo)
 
+Obs: Como o vídeo ficou grande, não conseguimos fazer o upload do arquivo no git, já que é permitido apenas 25MB de upload.
+
 ## Outros 
 Quaisquer outras informações sobre seu projeto podem ser descritas abaixo.
