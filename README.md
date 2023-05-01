@@ -42,5 +42,9 @@ Acesse o Gitpages do projeto: [https://projeto-de-algoritmos.github.io/Grafos1_R
 
 2. Abra o arquivo `index.html` no navegador utilizando um servidor local (como o [live server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)). Abrir o arquivo diretamente no navegador não funcionará. Isso é porque o navegador aponta um erro do CORS.
 
+## Vídeo de Apresentação
+
+- [Link para vídeo de apresentação do projeto](https://youtu.be/pno71yiAdTo)
+
 ## Outros 
 Quaisquer outras informações sobre seu projeto podem ser descritas abaixo.
