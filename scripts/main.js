@@ -170,6 +170,21 @@ function updateGrid(event) {
       );
       return;
     }
+    if(currentMode === MODES.eraser) {
+      const buffer = currentColor;
+      currentColor = COLOR_WHITE;
+      graph.updateNodeColor(squareId, currentColor, currentBrushSize);
+      currentColor = buffer;
+      return;
+    }
+    if(currentMode === MODES.rainbow) {
+      const randomRed = getRandomNumber();
+      const randomBlue = getRandomNumber();
+      const randomGreen = getRandomNumber();
+      const randomColor = new Color(randomRed, randomGreen, randomBlue);
+      graph.updateNodeColor(squareId, randomColor, currentBrushSize);
+      return;
+    }
     graph.updateNodeColor(squareId, currentColor, currentBrushSize);
     return;
   }
