@@ -21,7 +21,8 @@
 ​	Por fim, também pensamos nas opções de desfazer/refazer alterações no rascunho. No entanto, por falta de tempo, não conseguimos implementar essas funcionalidades. Os botões que as ativariam estão lá, mas apenas trazem um aviso de que a funcionalidade não está implementada.
 
 ## Screenshots
-Adicione 3 ou mais screenshots do projeto em funcionamento.
+
+
 
 ## Tecnologias 
 
