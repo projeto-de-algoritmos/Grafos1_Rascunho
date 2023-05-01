@@ -192,3 +192,7 @@ input[type="color"] {
   background-size: contain;
   pointer-events: none;
 }
+
+.selected .icon-image {
+  border-bottom: 3px solid black;
+}
